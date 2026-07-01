@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CI/CD Demo</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 40px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+        }
+
+        .card {
+            border: 1px solid gray;
+            padding: 20px;
+            width: 400px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>FastAPI CI/CD Demo</h1>
+
+<button onclick="getStatus()">Get Backend Status</button>
+
+<button onclick="sayHello()">Say Hello</button>
+
+<div class="card">
+    <pre id="output">Waiting...</pre>
+</div>
+
+<script>
+
+const API = "http://localhost:8000";
+
+async function getStatus() {
+
+    const response = await fetch(API + "/api/status");
+    const data = await response.json();
+
+    document.getElementById("output").textContent =
+        JSON.stringify(data, null, 2);
+}
+
+async function sayHello() {
+
+    const response = await fetch(API + "/api/greet/Narasimha");
+    const data = await response.json();
+
+    document.getElementById("output").textContent =
+        JSON.stringify(data, null, 2);
+}
+
+</script>
+
+</body>
+</html>
